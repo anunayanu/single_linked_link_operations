@@ -1,0 +1,231 @@
+#include<iostream>
+
+ using namespace std;
+
+ struct node
+ {
+     int data;
+     node *next;
+
+ };
+
+ class list
+ {
+     node *head;
+     node *tail;
+     node *temp;
+
+ public :
+   bool isEmpty()
+    {
+    return head == NULL;
+
+    }
+
+    list()
+    {
+        head = NULL;
+        tail = NULL;
+    }
+
+  void insertAtEnd(int x)
+    {
+        temp = new node();
+        temp->data = x;
+        temp->next = NULL;
+
+    if(isEmpty())
+    {
+        head = temp;
+        tail=temp;
+
+    }
+    else
+    {
+        tail->next = temp;
+        tail=temp;
+    }
+    }
+
+    void insertAtBeg(int x)
+    {
+    temp = new node();
+    temp->data = x;
+
+
+    if(isEmpty())
+    {
+   // head = temp;
+    temp->next =  NULL;
+    tail = temp;
+    }
+    else
+        temp->next =  head;
+    head = temp;
+    }
+
+    void insertAtPos(int pos, int x)
+    {
+            node *prev = new node();
+            node *current = new node();
+            current = head;
+            temp = new node();
+            temp->data = x;
+
+            int tempPos = 0;   // Traverses through the list
+
+            if(head != NULL)
+            {
+               while(current != NULL && tempPos != pos)
+               {
+                   prev = current;
+                   current = current->next;
+                   tempPos++;
+               }
+
+               if(pos == 0)
+               {
+                   cout << "Adding at Head! " << endl;
+                   insertAtBeg(x);
+               }
+               else if(current->next == NULL && pos == tempPos+1)
+               {
+                   cout << "Adding at Last! " << endl;
+                   insertAtEnd(x);
+               }
+               else if(pos>tempPos+1)
+               {
+                   cout << "Position is out of bound : " << endl;
+               }
+
+               else{
+                prev->next = temp;
+                temp->next = current;
+                cout << "Node added at position: " << pos << endl;
+               }
+
+            }
+            else
+            {
+                head = temp;
+                temp->next = NULL;
+                tail = temp;
+                cout << "Added at head as list is empty! " << endl;
+
+            }
+
+    }
+
+ void display()
+ {
+    if(!isEmpty())
+    {
+    temp = head;
+
+    while(temp!=NULL)
+    {
+    cout<<temp->data<<" ";
+    temp=temp->next;
+    }
+    }
+
+    else
+        cout<<"List is Empty"<<endl;
+ }
+
+ void deleteAtBeg()
+ {
+ if(isEmpty())
+    cout<<"List is Empty"<<endl;
+ else
+ {
+     temp=head;
+     head = temp->next;
+     delete temp;
+     }
+ }
+
+ void deleteAtEnd()
+ {
+     if(isEmpty())
+     cout<<"List is Empty"<<endl;
+ else
+ {
+     node *prev = new node();
+     temp = head;
+     while(temp->next != NULL)
+     {
+         prev = temp;
+         temp = temp->next;
+
+     }
+     prev->next = NULL;
+     tail = prev;
+     delete temp;
+ }
+ }
+
+ void deleteAtPos(int pos)
+ {
+     if(!isEmpty())
+     {
+         int tempPos=0;
+
+         if(pos == 0)
+         {
+             deleteAtBeg();
+         }
+         else {
+
+        node* prev = new node();
+        node* current = new node();
+        current = head;
+
+        while(current->next != NULL && tempPos != pos)
+        {
+            prev = current;
+            current = current->next;
+            tempPos++;
+
+        }
+
+        if(pos > tempPos+1)
+        {
+            cout<<"Position is out of scope, Nothing can be deleted ! "<<endl;
+        }
+        else{
+
+            prev->next = current->next;
+            delete current;
+        }
+
+         }
+     }
+     else
+        cout<<"List is Empty "<<endl;
+ }
+
+ };
+
+ int main()
+ {
+     list l;
+     l.insertAtBeg(12);
+     l.insertAtEnd(23);
+     l.insertAtEnd(45);
+     l.insertAtEnd(22);
+     l.insertAtPos(1,50);
+     l.insertAtPos(0,56);
+     l.deleteAtPos(2);
+     l.deleteAtPos(5);
+
+     l.deleteAtPos(53);
+   //  l.insertAtPos(34,56);
+   // l.insert(3,50);
+     //l.deleteAtEnd();
+    // l.deleteAtEnd();
+    //l.deleteAtBeg();
+     l.display();
+     return 0;
+ }
+
