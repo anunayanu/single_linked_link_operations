@@ -55,7 +55,7 @@
 
     if(isEmpty())
     {
-   // head = temp;
+   
     temp->next =  NULL;
     tail = temp;
     }
@@ -73,7 +73,7 @@
             temp->data = x;
 
             int tempPos = 0;   // Traverses through the list
-
+ 
             if(head != NULL)
             {
                while(current != NULL && tempPos != pos)
@@ -120,6 +120,7 @@
  {
     if(!isEmpty())
     {
+    	cout<<"Elements of list are :-  ";
     temp = head;
 
     while(temp!=NULL)
@@ -127,16 +128,17 @@
     cout<<temp->data<<" ";
     temp=temp->next;
     }
+    cout<<endl;
     }
 
     else
-        cout<<"List is Empty"<<endl;
+        cout<<"Sorry List is Empty, Nothing to display !\n"<<endl;
  }
 
  void deleteAtBeg()
  {
  if(isEmpty())
-    cout<<"List is Empty"<<endl;
+    cout<<"Sorry List is Empty, nothing to delete"<<endl;
  else
  {
      temp=head;
@@ -148,7 +150,7 @@
  void deleteAtEnd()
  {
      if(isEmpty())
-     cout<<"List is Empty"<<endl;
+     cout<<"Sorry List is Empty, nothing to delete"<<endl;
  else
  {
      node *prev = new node();
@@ -202,7 +204,7 @@
          }
      }
      else
-        cout<<"List is Empty "<<endl;
+        cout<<"Sorry List is Empty, nothing to delete"<<endl;
  }
 
  };
@@ -210,22 +212,44 @@
  int main()
  {
      list l;
-     l.insertAtBeg(12);
-     l.insertAtEnd(23);
-     l.insertAtEnd(45);
-     l.insertAtEnd(22);
-     l.insertAtPos(1,50);
-     l.insertAtPos(0,56);
-     l.deleteAtPos(2);
-     l.deleteAtPos(5);
+     system("cls");
+    int choice,n,pos;
+    while(1)
+    {
+        cout<<".......menu........\n"<<endl;
+        cout<<"1. insert at beginning"<<endl;
+        cout<<"2. insert at end"<<endl;
+        cout<<"3. insert at specific postion"<<endl;
+        cout<<"4. delete at beginning"<<endl;
+        cout<<"5. delete at end"<<endl;
+        cout<<"6. delete at specific postion"<<endl;
+        cout<<"7. display"<<endl;
+        cout<<"0.exit"<<endl;
+        cout<<"enter your choice"<<endl;
+        cin>>choice;
+        switch(choice)
+        {
+        
+            case 1:cout<<"enter the value which you want to insert"<<endl;
+            cin>>n;
+            l.insertAtBeg(n);break;
+            case 2:cout<<"enter the value which you want to insert"<<endl;
+            cin>>n;
+            l.insertAtEnd(n);break;
+            case 3:cout<<"enter the value which you want to insert and insert postion"<<endl;
+            cin>>n>>pos;
+            l.insertAtPos(n,pos);break;
+            case 4:l.deleteAtBeg();break;
+            case 5:l.deleteAtEnd();break;
+            case 6:cout<<"enter the position where you want to delete"<<endl;
+            cin>>pos;
+            l.deleteAtPos(pos);break;
+            case 7:l.display();break;
+            case 0:break;
+            default:cout<<"wrong entry try again"<<endl;
 
-     l.deleteAtPos(53);
-   //  l.insertAtPos(34,56);
-   // l.insert(3,50);
-     //l.deleteAtEnd();
-    // l.deleteAtEnd();
-    //l.deleteAtBeg();
-     l.display();
-     return 0;
+        }
+
+    }
+    return 0;
  }
-
